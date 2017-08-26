@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="families" class="whitebkg">
+{% for family in families %}
+<div class="family whitebkg">
+    <div class="section">
+    {% for student in family.students %}
+    <strong>{{ student.lastname }}, {{ student.firstname }}</strong>
+    ({{ student.grade }})</br>
+    {% endfor %}
+    </div>
+    <div class="section">
+    <strong>{{ family.parents }}</strong><br/>
+    {% for line in family.address %}
+    {{ line }}</br>
+    {% endfor %}
+    </div>
+    <div class="section">
+    {% for item in family.phone_numbers %}
+    {{ item.value }} ({{ item.label }})<br/>
+    {% endfor %}
+    {% for item in family.emails %}
+    {{ item.value }} ({{ item.label }})<br/>
+    {% endfor %}
+    </div>
+</div>
+{% endfor %}
+<br class="clear"/>
+</div>
+<!--
+<p class="timestamp">Last updated {{ timestamp }}</p>
+-->
+{% endblock %}
+
+{% block styles %}
+<link href={% static "datatables/css/jquery.dataTables.css" %} rel="stylesheet" type="text/css">
+<link href={% static "datatables/css/datatables-bootstrap.css" %} rel="stylesheet" type="text/css">
+<style>
+    #families {
+        padding: 10px;
+        white-space: nowrap;
+    }
+    .clear {
+        clear: both;
+    }
+    div.family {
+        float: left;
+        padding: 10px;
+        width: 300px;
+        height: 240px;
+        color: black;
+        background: #eec;
+        border: 5px solid white;
+    }
+    .family .section {
+        padding-bottom: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script src={% static "js/jquery-1.9.1.min.js" %}></script>
+<script src={% static "datatables/js/jquery.dataTables.js" %}></script>
+<script src={% static "datatables/js/paging.js" %}></script>
+<script>
+    $(function() {
+        $("#booklist table").dataTable({
+             "sDom": "<'row'<'span5'l><'span6'f>r>t<'row'<'span5'i><'span6'p>>",
+             "bStateSave": true,
+             "sPaginationType": "bootstrap",
+             "iDisplayLength": 15,
+             "aLengthMenu": [15,25,50,100],
+             "aoColumns": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  { "bVisible": false }
+                ]
+        });
+        $.extend( $.fn.dataTableExt.oStdClasses, {
+            "sWrapper": "dataTables_wrapper form-inline"
+        });
+    });
+</script>
+{% endblock %}

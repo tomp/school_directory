@@ -1,0 +1,32 @@
+{% extends "testing/base.html" %}
+
+{% block content %}
+<table id=summary cellspacing="0">
+  <caption>
+      Test Suite <br />
+      <span class="subtitle">{{ name }}</span>
+  </caption>
+  <col id="rowheaders"/>
+  <thead>
+    <tr>
+        <th></th>
+        {% for platname in platforms %}
+        <th class="colhead">{{ platname }}</th>
+        {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+      {% for rowname, row in rows %}
+      <tr class="result">
+          <td class="rowname">{{ rowname }}</td>
+          {% for item in row %}
+          <td class="{{ item.classname }}">
+              {{ item.label }}
+          </td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+<p class="timestamp">Last updated {{ timestamp }}</p>
+{% endblock %}

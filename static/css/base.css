@@ -1,0 +1,19 @@
+#banner {
+    height: 80px;
+    # background-color: #727;
+    background-color: #195c95;
+}
+#banner h1 {
+    font-size: 36px;
+    color: #eee;
+}
+.banner-title {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+body {
+    background-color: #195c95;
+}
+.whitebkg {
+    background-color: #fff;
+}

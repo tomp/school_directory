@@ -1,0 +1,10 @@
+# Vim
+*~
+*.sw[po]
+
+# Python
+*.pyc
+
+# Data
+db.sqlite
+*.csv

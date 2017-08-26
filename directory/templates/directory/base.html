@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+{% load static %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{{ title }}</title>
+    <link href="{% static "directory/bootstrap.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "directory/base.css" %}" rel="stylesheet" type="text/css">
+{% block styles %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+  </head>
+  <!--
+  <body background="{% static "directory/images/bg.gif" %}">
+   -->
+  <body>
+      <div id="banner" class="container">
+          <div class="span12">
+          <div class="banner-title">
+          <h1>Our Lady of Sorrows School Directory</h1>
+          </div>
+          </div>
+      </div>
+      <div class="container">
+          <div id="topnavbar" class="navbar navbar-inverse">
+              <div class="navbar-inner">
+                  <ul class="nav">
+                      <li><a href="{{ root_url }}">Home</a></li>
+                      <li><a href="{{ root_url }}contacts/classes/">Classes</a></li>
+                      <li><a href="{{ root_url }}contacts/families/">Families</a></li>
+                      <li><a href="{{ root_url }}contacts/students/">Students</a></li>
+                      <li><a href="{{ root_url }}contacts/adults/">Adults</a></li>
+                  </ul>
+                  <ul class="nav pull-right">
+                      <li><a href="{{ root_url }}admin/">Admin</a></li>
+                  </ul>
+              </div>
+          </div>
+          <div id="sidebar">
+          </div>
+          <div id="content">
+              {% block content %}
+              <p>Hello world!</p>
+              <p>ROOT_URL: {{ root_url }}</p>
+              {% endblock %}
+          </div>
+      </div>
+      <div id="footer" class="container">
+      </div>
+  </body>
+</html>

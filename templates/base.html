@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+{% load staticfiles %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{{ title }}</title>
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "css/base.css" %}" rel="stylesheet" type="text/css">
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+{% block styles %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+  </head>
+  <!--
+  <body background="{% static "images/bg.gif" %}">
+   -->
+  <body>
+      <div id="banner" class="container">
+          <div class="banner-title">
+          <h1>Our Lady of Sorrows School Directory</h1>
+          </div>
+      </div>
+      <div class="container">
+          <div id="topnavbar" class="navbar navbar-inverse navbar-static-top">
+              <div class="container-fluid">
+                  <ul class="nav navbar-nav">
+                      <li><a href="{% url 'contacts:index' %}">Home</a></li>
+                      <li><a href="{% url 'contacts:class_index' %}">Classes</a></li>
+                      <li><a href="{% url 'contacts:family_index' %}">Families</a></li>
+                      <li><a href="{% url 'contacts:student_index' %}">Students</a></li>
+                      <li><a href="{% url 'contacts:adult_index' %}">Adults</a></li>
+                  </ul>
+                  <ul class="nav navbar-nav pull-right">
+                      <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                  </ul>
+              </div>
+          </div>
+          <div id="sidebar">
+          </div>
+          <div id="content">
+              {% block content %}
+              <p>Hello world!</p>
+              <p>ROOT_URL: {{ root_url }}</p>
+              {% endblock %}
+          </div>
+      </div>
+      <div id="footer" class="container">
+      </div>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="bookdetail" class="span9 offset1 whitebkg">
+    <table class="table table-condensed">
+        <colgroup>
+            <col class="detail-key"></col>
+            <col class="detail-value"></col>
+        </colgroup>
+        <tbody>
+            <tr>
+                <td class="detail-key">OLS #</td>
+                <td>{{ book.olsnum }}</td>
+            </tr>
+            <tr>
+                <td class="detail-key">Title</td>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <td class="detail-key">Author(s)</td>
+                <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+                <td class="detail-key">Description</td>
+                <td>{{ book.description }}</td>
+            </tr>
+            <tr>
+                <td class="detail-key">Subjects</td>
+                <td>{{ book.subjects }}</td>
+            </tr>
+            <tr>
+                <td class="detail-key">Dewey number</td>
+                <td>{{ book.dewey }}</td>
+            </tr>
+            <tr>
+                <td class="detail-key">Location</td>
+                <td>{{ book.location }}</td>
+            </tr>
+            <tr>
+                <td class="detail-key">Lexile</td>
+                {% if lexile %}
+                <td><a href="http://www.lexile.com/book/details/{{ book.isbn }}/" target="_blank">{{ lexile }}</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td class="detail-key">OpenLibrary</td>
+                {% if book.openlibrary %}
+                <td><a href="http://openlibrary.org/works/{{ book.openlibrary }}/" target="_blank">{{ book.openlibrary }}</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td class="detail-key">GoogleBooks</td>
+                {% if book.googlebook %}
+                <td><a href="http://books.google.com/books?id={{ book.googlebook }}" target="_blank">{{ book.googlebook }}</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td class="detail-key">WorldCat</td>
+                {% if book.oclc %}
+                <td><a href="http://worldcat.org/oclc/{{ book.oclc }}/" target="_blank">{{ book.oclc }}</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td class="detail-key">LCCN</td>
+                {% if book.lccn %}
+                <td><a href="http://lccn.loc.gov/{{ book.lccn }}" target="_blank">{{ book.lccn }}</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td class="detail-key">ISBN</td>
+                <td>{{ book.isbn }}</td>
+            </tr>
+            <tr>
+                <td class="detail-key">Publisher</td>
+                <td>{{ book.publisher }}</td>
+            </tr>
+            <tr>
+                <td class="detail-key">Copyright</td>
+                <td>{{ book.copyright }}</td>
+            </tr>
+            <tr>
+            <tr>
+                <td class="detail-key">Source</td>
+                <td>{{ book.source }}</td>
+            </tr>
+            <!--
+            <tr>
+                <td class="detail-key">Book Librarian #</td>
+                <td>{{ book.booknum }}</td>
+            </tr>
+            -->
+        </tbody>
+    </table>
+</div>
+<!--
+<p class="timestamp">Last updated {{ timestamp }}</p>
+-->
+{% endblock %}
+
+{% block styles %}
+<style>
+    #bookdetail {
+        padding: 20px;
+    }
+    col.detail-key {
+        width: 160px;
+    }
+    td.detail-key {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

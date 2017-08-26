@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="booklist" class="span11 whitebkg">
+<table class="table table-condensed table-bordered table-hover datatable">
+  <col id="rowheaders"/>
+  <thead>
+    <tr>
+        {% for colname in colnames %}
+        <th class="colhead">{{ colname }}</th>
+        {% endfor %}
+        <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for row in rows %}
+      <tr class="bookrow">
+          <td><a href="{{ root_url }}books/{{ row.bookid }}/">{{ row.items.0 }}</a></td>
+          <td><a href="{{ root_url }}books/{{ row.bookid }}/">{{ row.items.1 }}</a></td>
+          <td>{{ row.items.2 }}</td>
+          <td>{{ row.items.3 }}</td>
+          <td class="hidden">{{ row.items.4 }}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+</div>
+<!--
+<p class="timestamp">Last updated {{ timestamp }}</p>
+-->
+{% endblock %}
+
+{% block styles %}
+<link href={% static "catalog/datatables/css/jquery.dataTables.css" %} rel="stylesheet" type="text/css">
+<link href={% static "catalog/datatables/css/datatables-bootstrap.css" %} rel="stylesheet" type="text/css">
+<style>
+    #booklist {
+        padding: 20px;
+        white-space: nowrap;
+    }
+    td.hidden {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script src={% static "catalog/jquery-1.9.1.min.js" %}></script>
+<script src={% static "catalog/datatables/js/jquery.dataTables.js" %}></script>
+<script src={% static "catalog/datatables/js/paging.js" %}></script>
+<script>
+    $(function() {
+        $("#booklist table").dataTable({
+             "sDom": "<'row'<'span5'l><'span6'f>r>t<'row'<'span5'i><'span6'p>>",
+             "bStateSave": true,
+             "sPaginationType": "bootstrap",
+             "iDisplayLength": 15,
+             "aLengthMenu": [15,25,50,100],
+             "aoColumns": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  { "bVisible": false }
+                ]
+        });
+        $.extend( $.fn.dataTableExt.oStdClasses, {
+            "sWrapper": "dataTables_wrapper form-inline"
+        });
+    });
+</script>
+{% endblock %}

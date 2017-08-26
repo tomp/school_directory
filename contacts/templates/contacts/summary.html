@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table id="booklist">
+  <caption>
+      All Books
+  </caption>
+  <col id="rowheaders"/>
+  <thead>
+    <tr>
+        <th></th>
+        {% for colname in colnames %}
+        <th class="colhead">{{ colname }}</th>
+        {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+      {% for rowname, row in rows %}
+      <tr class="bookrow">
+          <td class="rowname">{{ rowname }}</td>
+          {% for item in row %}
+          <td>{{ item.label }}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+<!--
+<p class="timestamp">Last updated {{ timestamp }}</p>
+-->
+{% endblock %}

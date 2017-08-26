@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="classlist" class="span11 whitebkg">
+{% for olsclass in classes %}
+<div class="class-roster {{ olsclass.classes }}">
+    <span class="grade">{{ olsclass.grade }}</span>
+    <table class="staff">
+        <tr> <td>Teacher:</td>
+            <td><span class="teacher">{{ olsclass.teacher }}</span></td> </tr>
+        <tr> <td>Aide:</td>
+            <td>{{ olsclass.aide }}</td> </tr>
+        <tr> <td>Class Mom:</td>
+            <td>{{ olsclass.classmom }}</td> </tr>
+    </table>
+    <ul>
+        {% for student in olsclass.students %}
+        <li>{{ student}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+<br class="clear"/>
+</div>
+<!--
+<p class="timestamp">Last updated {{ timestamp }}</p>
+-->
+{% endblock %}
+
+{% block styles %}
+<link href={% static "datatables/css/jquery.dataTables.css" %} rel="stylesheet" type="text/css">
+<link href={% static "datatables/css/datatables-bootstrap.css" %} rel="stylesheet" type="text/css">
+<style>
+    #classlist {
+        padding: 10px;
+        white-space: nowrap;
+    }
+    td {
+        padding-right: 10px;
+    }
+    .grade {
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .teacher {
+        font-weight: bold;
+    }
+    div.class-roster {
+        float: left;
+        padding: 20px;
+        border: 10px solid white;
+        width: 300px;
+        background: #eec;
+    }
+    .clear {
+        clear: both;
+    }
+    .class-roster ul {
+        list-style: none;
+    }
+    .class-roster .staff {
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script src={% static "js/jquery-1.9.1.min.js" %}></script>
+<script src={% static "datatables/js/jquery.dataTables.js" %}></script>
+<script src={% static "datatables/js/paging.js" %}></script>
+<script>
+    $(function() {
+        $("#booklist table").dataTable({
+             "sDom": "<'row'<'span5'l><'span6'f>r>t<'row'<'span5'i><'span6'p>>",
+             "bStateSave": true,
+             "sPaginationType": "bootstrap",
+             "iDisplayLength": 15,
+             "aLengthMenu": [15,25,50,100],
+             "aoColumns": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  { "bVisible": false }
+                ]
+        });
+        $.extend( $.fn.dataTableExt.oStdClasses, {
+            "sWrapper": "dataTables_wrapper form-inline"
+        });
+    });
+</script>
+{% endblock %}
